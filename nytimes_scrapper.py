@@ -10,11 +10,8 @@ from typing import Tuple, Optional
 from datetime import date
 import requests
 import time
-import sys
 import re
 import os
-
-from PIL import Image
 
 class NYTimesScrapper:
 

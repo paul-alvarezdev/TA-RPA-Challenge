@@ -3,7 +3,7 @@ from RPA.Robocorp.WorkItems import WorkItems
 class ConfigManager:
     env = "cloud"
     if env == "cloud":
-        #WorkItems.get_input_work_item()
+        WorkItems.get_input_work_item()
         SEARCH_PHRASE = WorkItems.get_work_item_variable("search_phrase")
         SECTIONS = WorkItems.get_work_item_variable("sections")
         MONTHS_NUMBER = WorkItems.get_work_item_variable("months_number")
