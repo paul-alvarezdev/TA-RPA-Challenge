@@ -3,7 +3,7 @@
 
 tasks:
   Minimal Task:
-    shell: python tasks.py
+    shell: python -m robocorp.tasks run tasks.py
 
 devTasks: {}
 
