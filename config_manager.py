@@ -1,17 +1,12 @@
 from RPA.Robocorp.WorkItems import WorkItems
 
 class ConfigManager:
-    env = "cloud"
-    if env == "cloud":
-        wi = WorkItems()
-        wi.get_input_work_item()
-        SEARCH_PHRASE = wi.get_work_item_variable("search_phrase")
-        SECTIONS = wi.get_work_item_variable("sections")
-        MONTHS_NUMBER = wi.get_work_item_variable("months_number")
-    else:
-        SEARCH_PHRASE = "ecuador"
-        SECTIONS = ["new york"]
-        MONTHS_NUMBER = 1
+
+    wi = WorkItems()
+    wi.get_input_work_item()
+    SEARCH_PHRASE = wi.get_work_item_variable("search_phrase")
+    SECTIONS = wi.get_work_item_variable("sections")
+    MONTHS_NUMBER = wi.get_work_item_variable("months_number")
 
     BASE_URL = "https://www.nytimes.com/search?dropmab=false&endDate=[end_date]&query=[search_phrase]&sections=%2C[sections]&sort=newest&startDate=[start_date]"
 

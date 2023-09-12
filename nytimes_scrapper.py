@@ -3,9 +3,9 @@ from selenium.webdriver.remote.webelement import WebElement
 from SeleniumLibrary.errors import ElementNotFound
 from dateutil.relativedelta import relativedelta
 from RPA.Browser.Selenium import Selenium
-from RPA.FileSystem import FileSystem
 from config_manager import ConfigManager
 from excel_manager import ExcelManager
+from RPA.FileSystem import FileSystem
 from typing import Tuple, Optional
 from datetime import date
 import requests
@@ -247,9 +247,9 @@ class NYTimesScrapper:
         url = self.replace_sections_in_url(url)
 
         self.open_website(url)
-
+        time.sleep(2)
         self.close_popup_window()
-
+        time.sleep(2)
         # Click on show more button to display all news
         self.show_all_news()
 
