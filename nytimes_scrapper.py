@@ -275,6 +275,5 @@ class NYTimesScrapper:
 
         except Exception as err:
             logging.error(err)
-            self.browser_lib.save_scree
         finally:
             self.browser_lib.close_all_browsers()
