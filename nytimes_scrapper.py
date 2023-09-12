@@ -9,11 +9,24 @@ from excel_manager import ExcelManager
 from typing import Tuple, Optional
 from datetime import date
 import pyautogui
+import logging
 import time
+import sys
 import re
 import os
 
+from PIL import Image
+
 class NYTimesScrapper:
+
+    stdout = logging.StreamHandler(sys.stdout)
+
+    logging.basicConfig(
+        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file")}',
+        level=logging.INFO,
+        format="[{%(filename)s:%(lineno)d} %(levelname)s - %(message)s",
+        handlers=[stdout],
+    )
 
     browser_lib = Selenium()
     browser_aux = Selenium()
@@ -207,7 +220,7 @@ class NYTimesScrapper:
 
             picture_filename = self.get_article_picture_filename(picture_url)   # Extract picture filename
 
-            self.download_article_picture(picture_url, picture_filename)    # Download picture through GUI
+            # self.download_article_picture(picture_url, picture_filename)    # Download picture through GUI
             
             article_text = f'{title} {description}' # Join title + description
 
@@ -252,6 +265,7 @@ class NYTimesScrapper:
             self.excel.write_in_excel_file(self.news_list)
 
         except Exception as err:
-            print(err)
+            logging.error(err)
+            self.browser_lib.save_scree
         finally:
             self.browser_lib.close_all_browsers()
