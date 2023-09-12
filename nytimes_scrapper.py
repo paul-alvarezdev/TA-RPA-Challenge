@@ -19,15 +19,6 @@ from PIL import Image
 
 class NYTimesScrapper:
 
-    stdout = logging.StreamHandler(sys.stdout)
-
-    logging.basicConfig(
-        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file")}',
-        level=logging.INFO,
-        format="[{%(filename)s:%(lineno)d} %(levelname)s - %(message)s",
-        handlers=[stdout],
-    )
-
     browser_lib = Selenium()
     browser_aux = Selenium()
     excel = ExcelManager()
@@ -42,7 +33,14 @@ class NYTimesScrapper:
     }
 
     def __init__(self) -> None:
-        pass
+        # Create output folder
+        self.file.create_directory(os.path.join('.', 'output'))
+        logging.basicConfig(
+        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file")}',
+        level=logging.ERROR,
+        format='%(asctime)s - %(levelname)s - %(message)s', 
+        datefmt='%B %d, %Y, %H:%M:%S'
+        )
 
     def replace_phrase_in_url(self) -> str:
         """ Returns the base url
@@ -240,8 +238,7 @@ class NYTimesScrapper:
         """ Main function responsible for function call management, download pictures.
         """
         try:
-            # Create output folder
-            self.file.create_directory(os.path.join('.', 'output'))
+            
 
             # The next methods replace the input parameters in the base URL. (from the config_manager.py)
             # The objective is perform the search and set the filters through the url (filters: date range, sections and relevance).
