@@ -1,4 +1,4 @@
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import ElementNotInteractableException, ElementClickInterceptedException
 from selenium.webdriver.remote.webelement import WebElement
 from SeleniumLibrary.errors import ElementNotFound
 from dateutil.relativedelta import relativedelta
@@ -111,12 +111,12 @@ class NYTimesScrapper:
         It will stop once the 'SHOW MORE' button disappears.
         """
         time.sleep(2)   # Avoid Target Adds
-        show_more_button_locator = 'xpath: //*[contains(text(), "Show More")]'
+        show_more_button_locator = 'css: [data-testid="search-show-more-button"]'
         while True:
             try:
                 self.browser_lib.click_element(show_more_button_locator)
-                time.sleep(1)   # Allow news to load
-            except ElementNotFound:
+                time.sleep(2)   # Allow news to load
+            except (ElementNotFound, ElementClickInterceptedException):
                 break # End of the news reached
             
     def get_article_date(self, article: WebElement) -> str:
