@@ -3,10 +3,11 @@ from RPA.Robocorp.WorkItems import WorkItems
 class ConfigManager:
     env = "cloud"
     if env == "cloud":
-        WorkItems.get_input_work_item()
-        SEARCH_PHRASE = WorkItems.get_work_item_variable("search_phrase")
-        SECTIONS = WorkItems.get_work_item_variable("sections")
-        MONTHS_NUMBER = WorkItems.get_work_item_variable("months_number")
+        wi = WorkItems()
+        wi.get_input_work_item()
+        SEARCH_PHRASE = wi.get_work_item_variable("search_phrase")
+        SECTIONS = wi.get_work_item_variable("sections")
+        MONTHS_NUMBER = wi.get_work_item_variable("months_number")
     else:
         SEARCH_PHRASE = "ecuador"
         SECTIONS = ["new york"]

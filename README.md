@@ -12,7 +12,7 @@
 - RPA Framework
 - Robocorp
 
-## Robocorp Input Data
+## Robocorp Input Data Example
 
 ```
 {
