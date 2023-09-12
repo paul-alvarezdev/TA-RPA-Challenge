@@ -45,7 +45,7 @@ class NYTimesScrapper:
 
     def setup_output_folder(self):
         """ Creates output fodler if not exists
-        If exists deletes all contents befor create it again
+        If exists deletes all contents
         """
         output_dir = os.path.join('.', 'output')
         if self.file.does_directory_exist(output_dir):
@@ -185,11 +185,12 @@ class NYTimesScrapper:
         output_folder = os.path.join(os.getcwd(), 'output')
         output_path = os.path.join(output_folder, picture_filename)
         self.browser_aux.open_available_browser(picture_url)
-        time.sleep(1) # Wait for the picture to load
+        time.sleep(3) # Wait for the picture to load
         pyautogui.hotkey('ctrl','s')
-        time.sleep(1) # Wait for he save screen to load
+        time.sleep(3) # Wait for he save screen to load
         pyautogui.write(output_path, interval = 0.05)
         pyautogui.press('enter')
+        time.sleep(1)
         self.browser_aux.close_window()
 
     def count_phrase_occurrences(self, search_phrase: str, article_text: str) -> int:
@@ -230,7 +231,7 @@ class NYTimesScrapper:
 
             picture_filename = self.get_article_picture_filename(picture_url)   # Extract picture filename
 
-            # self.download_article_picture(picture_url, picture_filename)    # Download picture through GUI
+            self.download_article_picture(picture_url, picture_filename)    # Download picture through GUI
             
             article_text = f'{title} {description}' # Join title + description
 
