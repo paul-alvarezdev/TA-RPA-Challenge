@@ -111,7 +111,7 @@ class NYTimesScrapper:
         It will stop once the 'SHOW MORE' button disappears.
         """
         time.sleep(2)   # Avoid Target Adds
-        show_more_button_locator = 'css: [data-testid="search-show-more-button"]'
+        show_more_button_locator = 'xpath: //*[contains(text(), "Show More")]'
         while True:
             try:
                 self.browser_lib.click_element(show_more_button_locator)
