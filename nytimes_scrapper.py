@@ -8,7 +8,7 @@ from config_manager import ConfigManager
 from excel_manager import ExcelManager
 from typing import Tuple, Optional
 from datetime import date
-import pyautogui
+import requests
 import time
 import sys
 import re
@@ -174,16 +174,15 @@ class NYTimesScrapper:
         """
         if picture_url is None:
             return
+        # Set picture name
         output_folder = os.path.join(os.getcwd(), 'output')
         output_path = os.path.join(output_folder, picture_filename)
-        self.browser_aux.open_available_browser(picture_url)
-        time.sleep(3) # Wait for the picture to load
-        pyautogui.hotkey('ctrl','s')
-        time.sleep(3) # Wait for he save screen to load
-        pyautogui.write(output_path, interval = 0.05)
-        pyautogui.press('enter')
-        time.sleep(1)
-        self.browser_aux.close_window()
+        response = requests.get(picture_url)
+        # Download
+        if response.status_code:
+            fp = open(output_path, 'wb')
+            fp.write(response.content)
+            fp.close() 
 
     def count_phrase_occurrences(self, search_phrase: str, article_text: str) -> int:
         """ counts the amount of occurrences of the search phrase in the article text
@@ -223,7 +222,7 @@ class NYTimesScrapper:
 
             picture_filename = self.get_article_picture_filename(picture_url)   # Extract picture filename
 
-            self.download_article_picture(picture_url, picture_filename)    # Download picture through GUI
+            self.download_article_picture(picture_url, picture_filename)    # Download picture 
             
             article_text = f'{title} {description}' # Join title + description
 
