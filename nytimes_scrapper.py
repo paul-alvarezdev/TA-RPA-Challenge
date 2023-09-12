@@ -9,7 +9,6 @@ from excel_manager import ExcelManager
 from typing import Tuple, Optional
 from datetime import date
 import pyautogui
-import logging
 import time
 import sys
 import re
@@ -35,13 +34,6 @@ class NYTimesScrapper:
     def __init__(self) -> None:
         # Create output folder
         self.setup_output_folder()
-        #Setup logging config
-        logging.basicConfig(
-        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file.txt")}',
-        level=logging.ERROR,
-        format='%(asctime)s - %(levelname)s - %(message)s', 
-        datefmt='%B %d, %Y, %H:%M:%S'
-        )
 
     def setup_output_folder(self):
         """ Creates output fodler if not exists
@@ -250,28 +242,24 @@ class NYTimesScrapper:
     def get_fresh_news(self):
         """ Main function responsible for function call management, download pictures.
         """
-        try:
-            
-            # The next methods replace the input parameters in the base URL. (from the config_manager.py)
-            # The objective is perform the search and set the filters through the url (filters: date range, sections and relevance).
-            # This allow us to acheive a more robust automation by skipping steps.
-            # The relevance filter is already embedded in the base url. (to sort news by the newest)
-            url = self.replace_phrase_in_url()
-            url = self.replace_daterange_in_url(url)
-            url = self.replace_sections_in_url(url)
+        # The next methods replace the input parameters in the base URL. (from the config_manager.py)
+        # The objective is perform the search and set the filters through the url (filters: date range, sections and relevance).
+        # This allow us to acheive a more robust automation by skipping steps.
+        # The relevance filter is already embedded in the base url. (to sort news by the newest)
+        url = self.replace_phrase_in_url()
+        url = self.replace_daterange_in_url(url)
+        url = self.replace_sections_in_url(url)
 
-            self.open_website(url)
+        self.open_website(url)
 
-            self.close_popup_window()
+        self.close_popup_window()
 
-            # Click on show more button to display all news
-            self.show_all_news()
+        # Click on show more button to display all news
+        self.show_all_news()
 
-            # Retrieve all news from the NYTimes search website
-            self.get_news_list()
+        # Retrieve all news from the NYTimes search website
+        self.get_news_list()
 
-            # Store news in excel file
-            self.excel.write_in_excel_file(self.news_list)
+        # Store news in excel file
+        self.excel.write_in_excel_file(self.news_list)
 
-        except Exception as err:
-            logging.error(err)
