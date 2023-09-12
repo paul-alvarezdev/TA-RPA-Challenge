@@ -1,6 +1,6 @@
 # RPA NYTimes Scrapper
 
-## Project Explanation
+## Project Structure Explanation
 
 - nytimes_scrapper.py: Main class responsible for navigation and article data extraction.
 - config_manager.py: class responsible to store initial parameters that could change over time.
@@ -11,5 +11,17 @@
 
 - RPA Framework
 - Robocorp
-- PyAutoGui
+
+## Robocorp Input Data
+
+```
+{
+  "search_phrase": "ecuador",
+  "sections": [
+    "new york"
+  ],
+  "months_number": 1
+}
+
+```
 
