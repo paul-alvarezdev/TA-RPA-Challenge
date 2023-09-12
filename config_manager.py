@@ -2,7 +2,7 @@ from RPA.Robocorp.WorkItems import WorkItems
 
 class ConfigManager:
     env = "local"
-    if env is "cloud":
+    if env == "cloud":
         #WorkItems.get_input_work_item()
         SEARCH_PHRASE = WorkItems.get_work_item_variable("search_phrase")
         SECTIONS = WorkItems.get_work_item_variable("sections")
