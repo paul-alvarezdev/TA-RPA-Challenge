@@ -34,14 +34,26 @@ class NYTimesScrapper:
 
     def __init__(self) -> None:
         # Create output folder
-        self.file.create_directory(os.path.join('.', 'output'))
+        self.setup_output_folder()
+        #Setup logging config
         logging.basicConfig(
-        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file")}',
+        filename= f'{os.path.join(os.path.join(".", "output"), "Log_file.txt")}',
         level=logging.ERROR,
         format='%(asctime)s - %(levelname)s - %(message)s', 
         datefmt='%B %d, %Y, %H:%M:%S'
         )
 
+    def setup_output_folder(self):
+        """ Creates output fodler if not exists
+        If exists deletes all contents befor create it again
+        """
+        output_dir = os.path.join('.', 'output')
+        if self.file.does_directory_exist(output_dir):
+            for dir_file in self.file.list_files_in_directory(output_dir):
+                self.file.remove_file(dir_file[0])
+        else:
+            self.file.create_directory(output_dir)
+    
     def replace_phrase_in_url(self) -> str:
         """ Returns the base url
         Replaces the auxiliar [search_phrase] with the SEARCH_PHRASE constant from the config_manager.py file.
@@ -239,7 +251,6 @@ class NYTimesScrapper:
         """
         try:
             
-
             # The next methods replace the input parameters in the base URL. (from the config_manager.py)
             # The objective is perform the search and set the filters through the url (filters: date range, sections and relevance).
             # This allow us to acheive a more robust automation by skipping steps.
