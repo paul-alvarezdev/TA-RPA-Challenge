@@ -247,8 +247,8 @@ class NYTimesScrapper:
         url = self.replace_daterange_in_url(url)
         url = self.replace_sections_in_url(url)
 
-        log.console_message(url)
-        
+        log.console_message(url, 'INFO')
+
         self.open_website(url)
         time.sleep(2)
         self.close_popup_window()
