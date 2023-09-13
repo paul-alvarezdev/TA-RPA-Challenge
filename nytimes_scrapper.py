@@ -8,13 +8,14 @@ from excel_manager import ExcelManager
 from RPA.FileSystem import FileSystem
 from typing import Tuple, Optional
 from datetime import date
+from robocorp import log
 import requests
 import time
 import re
 import os
 
 class NYTimesScrapper:
-
+    
     browser_lib = Selenium()
     browser_aux = Selenium()
     excel = ExcelManager()
@@ -246,6 +247,8 @@ class NYTimesScrapper:
         url = self.replace_daterange_in_url(url)
         url = self.replace_sections_in_url(url)
 
+        log.console_message(url)
+        
         self.open_website(url)
         time.sleep(2)
         self.close_popup_window()
