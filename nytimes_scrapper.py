@@ -79,10 +79,10 @@ class NYTimesScrapper:
         The section codes are extracted from the NYTimes site and are constants in the config manager file.
         This means new sections should be coded to work but the efficiency and robustness increases.
         """
-        auxiliar = '%2C[sections]'
+        auxiliar = '[sections]'
         for section in enumerate(ConfigManager.SECTIONS):
             url = url.replace(auxiliar, ConfigManager.SECTION_CODES[section[1]] + auxiliar)
-        url = url.replace(auxiliar, '')
+        url = url.replace('%2C'+auxiliar, '')
         return url
 
     def open_website(self, url: str):
