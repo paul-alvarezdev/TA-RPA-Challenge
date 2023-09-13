@@ -8,7 +8,9 @@ class ConfigManager:
     SECTIONS = wi.get_work_item_variable("sections")
     MONTHS_NUMBER = wi.get_work_item_variable("months_number")
 
+
     BASE_URL = "https://www.nytimes.com/search?dropmab=false&endDate=[end_date]&query=[search_phrase]&sections=[sections]&sort=newest&startDate=[start_date]"
+
 
     SECTION_CODES = {
         "any": "",
