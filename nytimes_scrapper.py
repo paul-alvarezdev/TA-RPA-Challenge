@@ -117,6 +117,7 @@ class NYTimesScrapper:
             try:
                 self.browser_lib.click_element(show_more_button_locator)
                 time.sleep(2)   # Allow news to load
+                log.console_message('SHOW MORE BUTTON PRESSED', 'INFO')
             except (ElementNotFound, ElementClickInterceptedException):
                 break # End of the news reached
             
