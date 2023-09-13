@@ -82,7 +82,7 @@ class NYTimesScrapper:
         auxiliar = '[sections]'
         for section in enumerate(ConfigManager.SECTIONS):
             url = url.replace(auxiliar, ConfigManager.SECTION_CODES[section[1]] + auxiliar)
-        url = url.replace('%2C'+auxiliar, '')
+        url = url.replace('%2C' + auxiliar, '')
         return url
 
     def open_website(self, url: str):
@@ -117,7 +117,7 @@ class NYTimesScrapper:
             try:
                 self.browser_lib.click_element(show_more_button_locator)
                 time.sleep(2)   # Allow news to load
-                log.console_message('SHOW MORE BUTTON PRESSED', 'INFO')
+                
             except (ElementNotFound, ElementClickInterceptedException):
                 break # End of the news reached
             
@@ -248,12 +248,10 @@ class NYTimesScrapper:
         url = self.replace_daterange_in_url(url)
         url = self.replace_sections_in_url(url)
 
-        log.console_message(url, 'INFO')
-
         self.open_website(url)
-        time.sleep(2)
+        
         self.close_popup_window()
-        time.sleep(2)
+        
         # Click on show more button to display all news
         self.show_all_news()
 
