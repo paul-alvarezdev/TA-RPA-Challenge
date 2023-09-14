@@ -250,14 +250,11 @@ class NYTimesScrapper:
 
         self.open_website(url)
         
-        time.sleep(3)
-        self.browser_lib.reload_page()
-        time.sleep(3)
         self.close_popup_window()
-        time.sleep(3)
+        
         # Click on show more button to display all news
         self.show_all_news()
-        time.sleep(3)
+        
         # Retrieve all news from the NYTimes search website
         self.get_news_list()
 
